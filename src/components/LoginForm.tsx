@@ -1,30 +1,43 @@
 // src/components/LoginForm.tsx
 import React, { useState } from 'react';
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-interface LoginFormProps {
-  onLoginSuccess?: () => void;
-}
-
-const LoginForm: React.FC<LoginFormProps> = ({ onLoginSuccess = () => {} }) => {
+const LoginForm: React.FC = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState<string | null>(null);
 
   const handleLogin = async () => {
+    // Check if username or password is empty
+    if (!username.trim() || !password.trim()) {
+      console.error('Username and password cannot be empty');
+      return;
+    }
+
     try {
-      // Validate input fields (add more validation as needed)
+      const response = await axios.post(
+        'http://localhost:5001/api/login',
+        { username, password },
+        { withCredentials: true }
+      );
 
-      // Make API request to login endpoint
-      const response = await axios.post('http://localhost:5001/api/login', { username, password }, { withCredentials: true });
+      console.log('Axios response:', response.data);
+      // Handle successful login on the frontend if needed
 
-      // Handle successful login
-      console.log(response.data);
-      onLoginSuccess();
+      // Show success toast message
+      toast.success('Login successful!');
     } catch (error) {
-      // Handle errors
-      console.error('Error during login:', error);
-      setError('Invalid credentials');
+      console.error('Axios error:', error);
+
+      // Check if the error is an AxiosError and has a response with status 401
+      if (axios.isAxiosError(error) && error.response?.status === 401) {
+        // Show failed toast message
+        toast.error('Invalid username or password. Please try again.');
+      } else {
+        // Show a generic error message for other errors
+        toast.error('An error occurred during login. Please try again.');
+      }
     }
   };
 
@@ -42,11 +55,17 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLoginSuccess = () => {} }) => {
           <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
         </label>
         <br />
-        <button type="button" onClick={handleLogin}>
+        <button
+          type="button"
+          onClick={handleLogin}
+          style={{ backgroundColor: 'green', color: 'white', padding: '10px' }}
+        >
           Login
         </button>
-        {error && <div style={{ color: 'red' }}>{error}</div>}
       </form>
+
+      {/* Toast container for displaying messages */}
+      <ToastContainer />
     </div>
   );
 };

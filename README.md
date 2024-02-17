@@ -27,12 +27,3 @@ Ensure you have the following installed on your machine:
    ```bash
    git clone https://github.com/parindersinghraina/react-signup-application.git
 
-# Running the Application Locally
-
-Follow these steps to run the React Signup and Login Application locally.
-
-## Navigate to the project directory:
-
-```bash
-cd react-signup-application
-

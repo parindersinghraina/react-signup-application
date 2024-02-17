@@ -36,3 +36,10 @@
     transform: rotate(360deg);
   }
 }
+
+.greenButton {
+  background-color: green;
+  color: white;
+  padding: 10px;
+}
+

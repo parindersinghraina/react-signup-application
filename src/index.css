@@ -1,5 +1,6 @@
 body {
-  margin: 0;
+  background-color: #bf4343; /* Set your desired background color */
+  margin: 0; /* Reset margin to ensure full background coverage */
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
