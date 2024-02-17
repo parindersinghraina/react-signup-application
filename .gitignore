@@ -1,0 +1,9 @@
+# Build
+/node_modules
+/dist
+
+# Mac File
+-.DS_Stroe
++.DS_Store
+/.DS_Store
+
