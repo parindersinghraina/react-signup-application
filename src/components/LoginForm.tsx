@@ -32,6 +32,9 @@ const LoginForm: React.FC = () => {
 
       // Show success toast message
       toast.success('Login successful!');
+      
+      // Set showConfetti to true in local storage
+      localStorage.setItem('showConfetti', 'true');
     } catch (error) {
       console.error('Axios error:', error);
 

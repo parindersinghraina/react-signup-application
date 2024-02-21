@@ -97,6 +97,16 @@ app.post('/api/login', async (req, res) => {
     }
 });
 
+app.get('/api/usercount', async (req, res) => {
+    try {
+        const userCount = await User.countDocuments();
+        res.json({ count: userCount });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });

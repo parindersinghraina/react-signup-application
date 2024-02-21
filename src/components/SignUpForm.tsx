@@ -27,11 +27,14 @@ const SignUpForm: React.FC = () => {
 
       console.log('Axios response:', response.data);
 
-      // Navigate to the login page on successful signup
-      navigate('/login');
-
-      // Show success toast message
-      toast.success('Signup successful!');
+      // Show a success toast message
+      toast.success('Signup successful! Please login.', {
+        onClose: () => {
+          // Navigate to the login page after the toast message disappears
+          navigate('/login');
+        },
+      });
+        
     } catch (error) {
       console.error('Axios error:', error);
 
@@ -44,6 +47,8 @@ const SignUpForm: React.FC = () => {
         toast.error('An error occurred during signup. Please try again.');
       }
     }
+    // Navigate to the login page on successful signup
+    // navigate('/login');
   };
 
   return (
@@ -78,6 +83,13 @@ const SignUpForm: React.FC = () => {
           Signup
         </button>
       </form>
+
+      <p>
+        Already have an account?{' '}
+        <a href="/login" className="link">
+          Login
+        </a>
+      </p>
 
       {/* Toast container for displaying messages */}
       <ToastContainer />

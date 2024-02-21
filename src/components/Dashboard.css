@@ -1,0 +1,24 @@
+.dashboard-container {
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    text-align: center;
+    background-color: #c2bcbc;
+    color: #333;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .dashboard-title {
+    font-size: 100px;
+    margin-bottom: 10px;
+  }
+  
+  .user-count {
+    font-weight: bold;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    font-size: 30px;
+    color: #333;
+  }
+  
