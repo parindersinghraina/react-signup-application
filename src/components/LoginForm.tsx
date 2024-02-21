@@ -1,12 +1,15 @@
-// src/components/LoginForm.tsx
+// LoginForm.tsx
 import React, { useState } from 'react';
-import axios, { AxiosError } from 'axios';
+import axios from 'axios';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useNavigate, Link } from 'react-router-dom';
+import './LoginForm.css';
 
 const LoginForm: React.FC = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate();
 
   const handleLogin = async () => {
     // Check if username or password is empty
@@ -23,7 +26,9 @@ const LoginForm: React.FC = () => {
       );
 
       console.log('Axios response:', response.data);
-      // Handle successful login on the frontend if needed
+
+      // Navigate to the dashboard on successful login
+      navigate('/dashboard');
 
       // Show success toast message
       toast.success('Login successful!');
@@ -42,27 +47,42 @@ const LoginForm: React.FC = () => {
   };
 
   return (
-    <div>
+    <div className="login-container">
       <h2>Login</h2>
       <form>
-        <label>
+        <label className="form-label">
           Username:
-          <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
+          <input
+            type="text"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            className="form-input"
+          />
         </label>
         <br />
-        <label>
+        <label className="form-label">
           Password:
-          <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            className="form-input"
+          />
         </label>
         <br />
         <button
           type="button"
           onClick={handleLogin}
-          style={{ backgroundColor: 'green', color: 'white', padding: '10px' }}
+          className="login-button"
         >
           Login
         </button>
       </form>
+
+      {/* Link to navigate to the signup page */}
+      <div className="signup-link">
+        Don't have an account? <Link to="/signup">Signup</Link>
+      </div>
 
       {/* Toast container for displaying messages */}
       <ToastContainer />

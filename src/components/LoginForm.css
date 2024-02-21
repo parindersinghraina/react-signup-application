@@ -1,6 +1,48 @@
 /* LoginForm.css */
 
 .login-container {
-  background-color: #f0f0f0; /* Add a background color */
-  /* ... rest of the styles */
+  text-align: center;
+  margin-top: 20px;
+  color: #de1010;
+  background-color: #f0f0f0;
+  padding: 20px;
+  margin: 20px;
+  border: 1px solid #dd1212;
+  border-radius: 15px;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+  color: #dd1414;
+  font-size: 18px;
+  margin-top: 10px;
+}
+
+.form-input {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  color: #333;
+  background-color: #f9f9f9;
+  box-sizing: border-box;
+}
+
+.login-button {
+  background-color: green;
+  color: white;
+  padding: 10px;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  font-size: 18px;
+  margin-top: 10px;
+}
+
+.login-button:hover {
+  background-color: darkgreen;
 }

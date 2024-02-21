@@ -1,45 +1,68 @@
-.App {
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  height: 100vh;
+  background-color: gray;
+}
+
+.heading {
+  margin-bottom: 20px;
+  font-size: 50px;
+  color: #f0ecec;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: bold;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.logo {
+  margin-left: 630px;
+  vertical-align: middle;
+  margin-bottom: 5px;
+  margin-top: 5px;
+  width: 150px;
+  height: 150px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.signup-container {
+  flex: 1;
+  text-align: center;
+  margin-top: 20px;
+  color: #de1010;
+  background-color: #f0f0f0;
+  padding: 20px;
+  margin: 20px;
+  border: 1px solid #dd1212;
+  border-radius: 15px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.login-container {
+  flex: 1;
+  text-align: center;
+  margin-top: 20px;
+  color: #de1010;
+  background-color: #f0f0f0;
+  padding: 20px;
+  margin: 20px;
+  border: 1px solid #dd1212;
+  border-radius: 15px;
+  margin-left: 20px; /* Add margin to shift the login container to the right */
 }
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-.greenButton {
-  background-color: green;
-  color: white;
+footer {
+  text-align: center;
+  margin-top: 20px;
   padding: 10px;
+  background-color: #f0f0f0;
+  border-top: 1px solid #ccc;
 }
 
+footer a {
+  color: #333;
+  text-decoration: none;
+  margin: 0 10px;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}

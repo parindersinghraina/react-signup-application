@@ -1,12 +1,15 @@
-// src/components/SignupForm.tsx
+// SignUpForm.tsx
 import React, { useState } from 'react';
 import axios, { AxiosError } from 'axios';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useNavigate } from 'react-router-dom';
+import './SignUpForm.css';
 
-const SignupForm: React.FC = () => {
+const SignUpForm: React.FC = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate();
 
   const handleSignup = async () => {
     // Check if username or password is empty
@@ -23,7 +26,9 @@ const SignupForm: React.FC = () => {
       );
 
       console.log('Axios response:', response.data);
-      // Handle successful signup on the frontend if needed
+
+      // Navigate to the login page on successful signup
+      navigate('/login');
 
       // Show success toast message
       toast.success('Signup successful!');
@@ -42,23 +47,33 @@ const SignupForm: React.FC = () => {
   };
 
   return (
-    <div>
+    <div className="signup-container">
       <h2>Signup</h2>
       <form>
-        <label>
+        <label className="form-label">
           Username:
-          <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
+          <input
+            type="text"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            className="form-input"
+          />
         </label>
         <br />
-        <label>
+        <label className="form-label">
           Password:
-          <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            className="form-input"
+          />
         </label>
         <br />
         <button
           type="button"
           onClick={handleSignup}
-          style={{ backgroundColor: 'black', color: 'white', padding: '10px' }}
+          className="submit-button"
         >
           Signup
         </button>
@@ -70,4 +85,4 @@ const SignupForm: React.FC = () => {
   );
 };
 
-export default SignupForm;
+export default SignUpForm;
