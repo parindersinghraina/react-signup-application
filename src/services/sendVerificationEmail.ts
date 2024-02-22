@@ -1,6 +1,5 @@
 import nodemailer from 'nodemailer';
 import * as dotenv from 'dotenv';
-import Mailgun from 'mailgun-js';
 
 dotenv.config();
 
@@ -9,9 +8,9 @@ const sendVerificationEmail = async (to: string, token: string) => {
   // Set up your nodemailer transporter with Mailgun
   const transporter = nodemailer.createTransport({
     host: 'smtp.mailgun.org',
-    port: 587,
+    port: 465,
     service: 'Mailgun',
-    secure: true,
+    secure: false,
     auth: {
       user: process.env.MAILGUN_USER, 
       pass: process.env.MAILGUN_PASS, 
