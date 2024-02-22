@@ -1,40 +1,60 @@
 // SignUpForm.tsx
 import React, { useState } from 'react';
-import axios, { AxiosError } from 'axios';
+import axios from 'axios';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
 import './SignUpForm.css';
+import sendVerificationEmail from '../services/sendVerificationEmail';
+
 
 const SignUpForm: React.FC = () => {
   const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
+  const [showPassword, setShowPassword] = useState<boolean>(false);
+
+
+  const validateEmail = (email: string): boolean => {
+    // Simple email validation using a regular expression
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
 
   const handleSignup = async () => {
-    // Check if username or password is empty
-    if (!username.trim() || !password.trim()) {
-      console.error('Username and password cannot be empty');
+    // Check if username, email, or password is empty
+    if (!username.trim() || !email.trim() || !password.trim()) {
+      console.error('Username, email, and password cannot be empty');
+      return;
+    }
+
+    // Validate email format
+    if (!validateEmail(email)) {
+      console.error('Invalid email format');
+      toast.error('Invalid email format. Please enter a valid email.');
       return;
     }
 
     try {
       const response = await axios.post(
         'http://localhost:5001/api/signup',
-        { username, password },
+        { username, email, password },
         { withCredentials: true }
       );
 
       console.log('Axios response:', response.data);
 
-      // Show a success toast message
-      toast.success('Signup successful! Please login.', {
+      toast.success('Signup successful! You can now login.', {
         onClose: () => {
           // Navigate to the login page after the toast message disappears
           navigate('/login');
+
         },
       });
-        
+
     } catch (error) {
       console.error('Axios error:', error);
 
@@ -47,8 +67,10 @@ const SignUpForm: React.FC = () => {
         toast.error('An error occurred during signup. Please try again.');
       }
     }
-    // Navigate to the login page on successful signup
-    // navigate('/login');
+  };
+   // Toggle password visibility
+   const togglePasswordVisibility = () => {
+    setShowPassword((prevShowPassword) => !prevShowPassword);
   };
 
   return (
@@ -66,12 +88,28 @@ const SignUpForm: React.FC = () => {
         </label>
         <br />
         <label className="form-label">
+          Email:
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className="form-input"
+          />
+        </label>
+        <br />
+        <label className="form-label">
           Password:
           <input
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             className="form-input"
+          />
+          {/* Eye icon to toggle password visibility */}
+          <FontAwesomeIcon
+            icon={showPassword ? faEye : faEyeSlash}
+            onClick={togglePasswordVisibility}
+            className="eye-icon"
           />
         </label>
         <br />

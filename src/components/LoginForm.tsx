@@ -4,11 +4,14 @@ import axios from 'axios';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate, Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import './LoginForm.css';
 
 const LoginForm: React.FC = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState<boolean>(false);
   const navigate = useNavigate();
 
   const handleLogin = async () => {
@@ -27,14 +30,17 @@ const LoginForm: React.FC = () => {
 
       console.log('Axios response:', response.data);
 
-      // Navigate to the dashboard on successful login
-      navigate('/dashboard');
+      // Check if the user is verified
+      if (response.data.verified === true) {
+        // Navigate to the dashboard on successful login
+        navigate('/dashboard');
 
-      // Show success toast message
-      toast.success('Login successful!');
-      
-      // Set showConfetti to true in local storage
-      localStorage.setItem('showConfetti', 'true');
+        // Show success toast message
+        toast.success('Login successful!');
+
+        // Set showConfetti to true in local storage
+        localStorage.setItem('showConfetti', 'true');
+      } 
     } catch (error) {
       console.error('Axios error:', error);
 
@@ -42,11 +48,22 @@ const LoginForm: React.FC = () => {
       if (axios.isAxiosError(error) && error.response?.status === 401) {
         // Show failed toast message
         toast.error('Invalid username or password. Please try again.');
+
       } else {
-        // Show a generic error message for other errors
-        toast.error('An error occurred during login. Please try again.');
+        if (axios.isAxiosError(error) && error.response?.status === 403) {
+          // Show a toast message indicating that the user is not verified
+          toast.error('Account not verified. Please check your email for verification.');
+        } else {
+          // Show a generic error message for other errors
+          toast.error('An error occurred during login. Please try again.');
+        }
       }
     }
+  };
+
+  // Toggle password visibility
+  const togglePasswordVisibility = () => {
+    setShowPassword((prevShowPassword) => !prevShowPassword);
   };
 
   return (
@@ -66,10 +83,16 @@ const LoginForm: React.FC = () => {
         <label className="form-label">
           Password:
           <input
-            type="password"
+            type={showPassword ? 'text' : 'password'}
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             className="form-input"
+          />
+          {/* Eye icon to toggle password visibility */}
+          <FontAwesomeIcon
+            icon={showPassword ? faEye : faEyeSlash}
+            onClick={togglePasswordVisibility}
+            className="eye-icon"
           />
         </label>
         <br />
