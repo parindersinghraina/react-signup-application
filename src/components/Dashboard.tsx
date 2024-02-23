@@ -11,6 +11,8 @@ interface UserCountResponse {
   count: number;
 }
 
+const welcomeVideo = '/welcome.mp4';
+
 const Dashboard: React.FC = () => {
   const { width, height } = useWindowSize();
   const [userCount, setUserCount] = useState<number | null>(null);
@@ -43,10 +45,10 @@ const Dashboard: React.FC = () => {
 
   return (
     <div className="dashboard-container">
-      <WorldClock timezone="EST" />
-      <h2 className="dashboard-title">Dashboard</h2>
-      <p className="user-count">Total Users: {userCount !== null ? userCount : 'Loading...'}</p>
-
+      <video autoPlay muted loop className="dashboard-video">
+        <source src={welcomeVideo} type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
       {/* Show confetti when showConfetti is true */}
       {showConfetti && <Confetti width={width} height={height} />}
     </div>

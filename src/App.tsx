@@ -7,6 +7,8 @@ import Dashboard from './components/Dashboard';
 import Header from './components/Header';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import './App.css';
+import WorldClock from './components/WorldClock';
+import MortgageCalculator from './components/MortgageCalculator';
 
 const App: React.FC = () => {
   return (
@@ -19,10 +21,14 @@ const App: React.FC = () => {
             <Route path="/signup" element={<SignUp />} />
             <Route path="/login" element={<LoginForm />} />
             <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/worldclock" element={<WorldClock timezone={'EST'}/>} />
+            <Route path="/mortgagecalculator" element={<MortgageCalculator />} />
 
             <Route path="*" element={<Navigate to="/login" />} />
             <Route path="/" element={<Navigate to="/signup" />} />
             <Route path="/dashboard/*" element={<Navigate to="/dashboard" />} />
+            <Route path="/worldclock/*" element={<Navigate to="dashboard/worldclock" />} />
+            <Route path="/mortgagecalculator/*" element={<Navigate to="dashboard/mortgagecalculator" />} />
           </Routes>
         </div>
         <Footer />
