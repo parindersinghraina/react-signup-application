@@ -3,7 +3,7 @@
 /dist
 
 # Files
-secrets.env
+config.json
 
 # Mac File
 -.DS_Stroe

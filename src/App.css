@@ -16,10 +16,10 @@
 }
 
 .logo {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 5px auto;
+  margin-left: 630px;
+  vertical-align: middle;
+  margin-bottom: 5px;
+  margin-top: 5px;
   width: 150px;
   height: 150px;
 }

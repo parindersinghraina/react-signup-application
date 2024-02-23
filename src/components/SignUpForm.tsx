@@ -1,3 +1,4 @@
+// SignUpForm.tsx
 import React, { useState } from 'react';
 import axios from 'axios';
 import { toast, ToastContainer } from 'react-toastify';
@@ -6,6 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
 import './SignUpForm.css';
+import sendVerificationEmail from '../services/sendVerificationEmail';
 
 
 const SignUpForm: React.FC = () => {
@@ -103,8 +105,8 @@ const SignUpForm: React.FC = () => {
             onChange={(e) => setPassword(e.target.value)}
             className="form-input"
           />
-           {/* Eye icon to toggle password visibility */}
-           <FontAwesomeIcon
+          {/* Eye icon to toggle password visibility */}
+          <FontAwesomeIcon
             icon={showPassword ? faEye : faEyeSlash}
             onClick={togglePasswordVisibility}
             className="eye-icon"

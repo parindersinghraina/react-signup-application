@@ -19,7 +19,7 @@ const corsOptions = {
 
 // Connect to MongoDB
 const mongoOptions: ConnectOptions = {
-    useNewUrlParser: true,
+    useNewUrlParser: true, 
     useUnifiedTopology: true,
 } as ConnectOptions;
 
