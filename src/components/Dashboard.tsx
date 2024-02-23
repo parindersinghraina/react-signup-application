@@ -3,12 +3,16 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Confetti from 'react-confetti';
 import './Dashboard.css';
+import { useWindowSize } from 'react-use';
+import WorldClock from './WorldClock';
+
 
 interface UserCountResponse {
   count: number;
 }
 
 const Dashboard: React.FC = () => {
+  const { width, height } = useWindowSize();
   const [userCount, setUserCount] = useState<number | null>(null);
   const [showConfetti, setShowConfetti] = useState<boolean>(false);
 
@@ -39,13 +43,12 @@ const Dashboard: React.FC = () => {
 
   return (
     <div className="dashboard-container">
+      <WorldClock timezone="EST" />
       <h2 className="dashboard-title">Dashboard</h2>
       <p className="user-count">Total Users: {userCount !== null ? userCount : 'Loading...'}</p>
 
       {/* Show confetti when showConfetti is true */}
-      {showConfetti && <Confetti />}
-
-      {/* Other dashboard content */}
+      {showConfetti && <Confetti width={width} height={height} />}
     </div>
   );
 };
