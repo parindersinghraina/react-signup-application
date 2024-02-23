@@ -39,6 +39,7 @@
     "react-toastify": "^10.0.4",
     "react-use": "^17.5.0",
     "ts-node": "^10.9.2",
+    "twilio": "^4.22.0",
     "typescript": "^4.9.5",
     "uuid": "^9.0.1",
     "web-vitals": "^2.1.4"

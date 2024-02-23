@@ -29,6 +29,42 @@
   }
   
   .logout-button:hover {
-    background-color: darkred;
+    background-color: #ff4057;
   }
+
+  .header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: #333;
+    color: white;
+  }
+  
+  .tabs-container {
+    display: flex;
+  }
+  
+  .tab {
+    margin-right: 10px;
+  }
+  
+  .tab-button {
+    background-color: #555;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    outline: none;
+  }
+  
+  .tab-button:hover {
+    background-color: #ff4057;
+  }
+  
+  .tab-button.active {
+    background-color: #ff4057;
+  }
+  
   
