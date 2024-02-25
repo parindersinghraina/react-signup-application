@@ -5,7 +5,9 @@ const twilioClient = new Twilio(config.TWILIO_ACCOUNT_SID, config.TWILIO_AUTH_TO
 
 async function sendOTP(phoneNumber: string): Promise<void> {
     try {
-        const otp = generateOTP(); // You need to implement your OTP generation logic
+        // Generate a 6-digit OTP
+        const otp = generateOTP(); 
+        
         await twilioClient.messages.create({
             body: `Your OTP is: ${otp}`,
             from: config.TWILIO_PHONE_NUMBER,

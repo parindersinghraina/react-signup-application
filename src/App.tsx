@@ -17,19 +17,20 @@ const App: React.FC = () => {
         <Header /> 
         <img src="/logo.png" alt="Logo" className="logo" />
         <div className="container">
-          <Routes>
+        <Routes>
             <Route path="/signup" element={<SignUp />} />
             <Route path="/login" element={<LoginForm />} />
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/worldclock" element={<WorldClock timezone={'EST'}/>} />
-            <Route path="/mortgagecalculator" element={<MortgageCalculator />} />
+            <Route path ="/dashboard" element={<Dashboard />} />
+            <Route path ="/worldclock" element={<WorldClock timezone={'EST'} />} />
+            <Route path ="/mortgagecalculator" element={<MortgageCalculator />} />
 
+            {/* Redirects */}
             <Route path="*" element={<Navigate to="/login" />} />
             <Route path="/" element={<Navigate to="/signup" />} />
             <Route path="/dashboard/*" element={<Navigate to="/dashboard" />} />
-            <Route path="/worldclock/*" element={<Navigate to="dashboard/worldclock" />} />
-            <Route path="/mortgagecalculator/*" element={<Navigate to="dashboard/mortgagecalculator" />} />
-          </Routes>
+            <Route path="/worldclock/*" element={<Navigate to="/dashboard/worldclock" />} />
+            <Route path="/mortgagecalculator/*" element={<Navigate to="/dashboard/mortgagecalculator" />} />
+        </Routes>
         </div>
         <Footer />
       </div>

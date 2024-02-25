@@ -7,13 +7,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
 import './SignUpForm.css';
-import sendVerificationEmail from '../services/sendVerificationEmail';
 
 
 const SignUpForm: React.FC = () => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState<boolean>(false);
 
@@ -105,6 +105,16 @@ const SignUpForm: React.FC = () => {
             onChange={(e) => setPassword(e.target.value)}
             className="form-input"
           />
+          <label className="form-label">
+            Phone Number:
+            <input
+              type="text"
+              value={phoneNumber}
+              onChange={(e) => setPhoneNumber(e.target.value)}
+              className="form-input"
+            />
+          <br/ >
+          </label>
           {/* Eye icon to toggle password visibility */}
           <FontAwesomeIcon
             icon={showPassword ? faEye : faEyeSlash}

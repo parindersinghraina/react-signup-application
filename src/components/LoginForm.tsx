@@ -38,6 +38,9 @@ const LoginForm: React.FC = () => {
         // Show success toast message
         toast.success('Login successful!');
 
+        // Set token in local storage
+        localStorage.setItem('token', response.data.token);
+
         // Set showConfetti to true in local storage
         localStorage.setItem('showConfetti', 'true');
       } 

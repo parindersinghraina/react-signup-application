@@ -1,13 +1,12 @@
-// server.ts
-
 import cors from 'cors';
 import mongoose, { ConnectOptions } from 'mongoose';
 import express from 'express';
 import * as bodyParser from 'body-parser';
 import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
 import { v4 as uuidv4 } from 'uuid';
 import sendVerificationEmail from './sendVerificationEmail';
-import otpTwilio from './otpTwilio';
+import * as config from '../config.json';
 
 const app = express();
 const PORT = 5001;
@@ -40,7 +39,7 @@ const User = mongoose.model('User', new mongoose.Schema({
     password: String,
     verified: { type: Boolean, default: false },
     verificationToken: { type: String },
-    phoneNumber: String, // Added phoneNumber field for OTP
+    phoneNumber: String,
 }));
 
 app.post('/api/signup', async (req, res) => {
@@ -59,7 +58,6 @@ app.post('/api/signup', async (req, res) => {
         await newUser.save();
 
         await sendVerificationEmail(email, verificationToken);
-        await otpTwilio.sendOTP(phoneNumber); // Send OTP to the user's phone
 
         res.status(201).json({ message: 'User created successfully. Check your email for verification.' });
     } catch (error) {
@@ -82,7 +80,11 @@ app.post('/api/login', async (req, res) => {
 
             if (isPasswordValid) {
                 if (user.verified) {
-                    return res.status(200).json({ message: 'Login successful', verified: user.verified });
+                    // Login successful, generate JWT
+                    const token = jwt.sign({ username: user.username, userId: user._id }, config.JWT_SECRET, { expiresIn: '1h' });
+
+                    // Send the token in the response
+                    return res.status(200).json({ message: 'Login successful', verified: user.verified, token });
                 } else {
                     return res.status(403).json({ error: 'Account not verified. Please check your email for verification.' });
                 }
