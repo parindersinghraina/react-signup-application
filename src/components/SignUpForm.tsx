@@ -68,8 +68,8 @@ const SignUpForm: React.FC = () => {
       }
     }
   };
-   // Toggle password visibility
-   const togglePasswordVisibility = () => {
+  // Toggle password visibility
+  const togglePasswordVisibility = () => {
     setShowPassword((prevShowPassword) => !prevShowPassword);
   };
 
@@ -98,6 +98,17 @@ const SignUpForm: React.FC = () => {
         </label>
         <br />
         <label className="form-label">
+          Phone Number:
+          <input
+            type="text"
+            value={phoneNumber}
+            onChange={(e) => setPhoneNumber(e.target.value)}
+            className="form-input"
+          />
+          <br />
+        </label>
+        <br />
+        <label className="form-label">
           Password:
           <input
             type="password"
@@ -105,16 +116,7 @@ const SignUpForm: React.FC = () => {
             onChange={(e) => setPassword(e.target.value)}
             className="form-input"
           />
-          <label className="form-label">
-            Phone Number:
-            <input
-              type="text"
-              value={phoneNumber}
-              onChange={(e) => setPhoneNumber(e.target.value)}
-              className="form-input"
-            />
-          <br/ >
-          </label>
+
           {/* Eye icon to toggle password visibility */}
           <FontAwesomeIcon
             icon={showPassword ? faEye : faEyeSlash}

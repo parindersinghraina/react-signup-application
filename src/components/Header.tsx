@@ -24,6 +24,8 @@ const Header: React.FC = () => {
   const isDashboard = location.pathname === '/dashboard';
   const isWorldClock = location.pathname === '/worldclock';
   const isMortgageCalculator = location.pathname === '/mortgagecalculator';
+  const isProductDetection = location.pathname === '/productdetection';
+  const isSocialNetwork = location.pathname === '/socialnetwork';
 
   return (
     <div className="header-container">
@@ -44,9 +46,24 @@ const Header: React.FC = () => {
               Mortgage Calculator
             </button>
           </div>
+          <div className={`tab${location.pathname === '/productdetection' ? ' active' : ''}`}>
+            <button className="tab-button" onClick={() => navigateTo('/productdetection')}>
+              Product Detector
+            </button>
+          </div>
+          <div className={`tab${location.pathname === '/socialnetwork' ? ' active' : ''}`}>
+            <button className="tab-button" onClick={() => navigateTo('/socialnetwork')}>
+              Social Network
+            </button>
+          </div>
+          <div className={`tab${location.pathname === '/searchproduct' ? ' active' : ''}`}>
+            <button className="tab-button" onClick={() => navigateTo('/searchproduct')}>
+              Search Product
+            </button>
+          </div>
         </div>
       )}
-      {isAuthenticated && (isDashboard || isWorldClock || isMortgageCalculator)  && (
+      {isAuthenticated && (isDashboard || isWorldClock || isMortgageCalculator || isProductDetection || isSocialNetwork)  && (
         <div className="logout-button-container">
           <button className="logout-button" onClick={handleLogout}>
             Logout

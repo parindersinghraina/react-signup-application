@@ -1,0 +1,32 @@
+/* SocialNetwork.css */
+.social-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  margin: 20px 0;
+}
+
+.social-link {
+  text-decoration: none;
+  color: #fff;
+  background-color: #ff4057;
+  border: 1px solid #ff4057;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: inline-block;
+  text-align: center;
+  font-weight: bold;
+  padding: 10px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+  font-size: 18px;
+  margin: 0 10px;
+}
+
+/* Add individual styles for each iframe */
+iframe {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
