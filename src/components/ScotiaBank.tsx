@@ -1,5 +1,5 @@
 import React from 'react';
-import './Telegram.css';
+import './ScotiaBank.css';
 
 const Telegram: React.FC = () => {
   return (

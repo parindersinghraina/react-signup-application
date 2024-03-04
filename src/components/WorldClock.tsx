@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import moment from 'moment-timezone';
-import './WorldClock.css'; // Import the CSS file
+import './WorldClock.css'; 
 
 interface WorldClockProps {
   timezone: string;

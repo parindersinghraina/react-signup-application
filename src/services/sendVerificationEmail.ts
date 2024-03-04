@@ -22,7 +22,8 @@ const sendVerificationEmail = async (to: string, token: string) => {
       Body: {
         Html: {
           Charset: 'UTF-8',
-          Data: `<p>Click the following link to verify your email: <a href="http://localhost:5001/api/verify/${token}">Verify</a></p>`,
+          Data: `
+          <p>Click the following link to verify your email: <a href="http://localhost:5001/api/verify/${token}">Verify</a></p>`,
         },
       },
       Subject: {

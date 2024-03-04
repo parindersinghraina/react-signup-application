@@ -47,7 +47,7 @@ const SignUpForm: React.FC = () => {
 
       console.log('Axios response:', response.data);
 
-      toast.success('Signup successful! You can now login.', {
+      toast.success('Signup successful! Please Check your email.', {
         onClose: () => {
           // Navigate to the login page after the toast message disappears
           navigate('/login');

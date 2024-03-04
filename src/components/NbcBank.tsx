@@ -1,5 +1,5 @@
 import React from 'react';
-import './WhatsApp.css';
+import './NbcBank.css';
 
 const WhatsApp: React.FC = () => {
   return (
