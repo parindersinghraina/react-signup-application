@@ -32,7 +32,7 @@ const Weather: React.FC = () => {
     try {
       const locationResponse = await axios.get<Location[]>(`http://dataservice.accuweather.com/locations/v1/cities/search?q=${city}&country=${country}&apikey=${accuWeatherApiKey}`);
       const location = locationResponse.data.find(
-        location => location.LocalizedName === city.charAt(0).toUpperCase() + city.slice(1) && location.Country.LocalizedName === country.charAt(0).toUpperCase() + country.slice(1)
+        location => location.LocalizedName === city.charAt(0).toUpperCase() + city.slice(1).toLowerCase() && location.Country.LocalizedName === country.charAt(0).toUpperCase() + country.slice(1).toLowerCase()
       );
 
       if (location) {
@@ -85,13 +85,10 @@ const Weather: React.FC = () => {
 
       {showPopup && (
         <div className="weather-popup">
+          <p>{weatherData[0].WeatherText}</p>
+          <p>{`${weatherData[0].Temperature.Metric.Value} ${weatherData[0].Temperature.Metric.Unit}`}</p>
+          <img src={`${weatherData[0].Temperature.Metric.UnitType}.png`} alt="weather Icon" height="150" width="150" />
           <button className="close-popup" onClick={handleClosePopup}>Close</button>
-          <p>Weather: {weatherData[0].WeatherText}</p>
-          <p>Temperature: {weatherData[0].Temperature.Metric.Value}</p>
-          <p>Unit: {weatherData[0].Temperature.Metric.Unit}</p>
-          {/* Add graphic icons based on weather conditions */}
-          {/* Replace placeholder icons with actual weather icons */}
-          <img src="sunIcon.png" alt="Sun Icon" />
         </div>
       )}
     </div>

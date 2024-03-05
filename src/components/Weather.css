@@ -53,26 +53,27 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   }
   
-  /* Close Popup Button Should be at the top right corner */
+  .weather-popup p {
+    font-weight: bold; /* Make paragraphs bold */
+    font-size: 16px; /* Adjust font size */
+  }
+  
   .weather-popup .close-popup {
     position: absolute;
-    top: 0;
-    right: 0;
+    bottom: 10px;
+    right: 50%; /* Center horizontally */
+    transform: translateX(50%); /* Center horizontally */
     background-color: #ff4057;
     color: white;
-    padding: 10px 15px;
+    padding: 5px 50px; /* Adjust padding to center the button */
     border: none;
     font-size: 16px;
     font-weight: bold;
-    margin-top: 10px;
-    width: 100%;
     border-radius: 4px;
     cursor: pointer;
+    transition: background-color 0.3s ease;
   }
   
-  .weather-popup p {
-    margin-bottom: 15px;
+  .weather-popup .close-popup:hover {
+    background-color: #45a049;
   }
-  
-  /* Add more styles or modify as needed */
-  
