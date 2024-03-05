@@ -87,7 +87,15 @@ const Weather: React.FC = () => {
         <div className="weather-popup">
           <p>{weatherData[0].WeatherText}</p>
           <p>{`${weatherData[0].Temperature.Metric.Value} ${weatherData[0].Temperature.Metric.Unit}`}</p>
-          <img src={`${weatherData[0].Temperature.Metric.UnitType}.png`} alt="weather Icon" height="150" width="150" />
+          <img src={`${weatherData[0].WeatherIcon}.png`} alt="weather Icon" height="150" width="150" />
+          {/* Add Link of Result */}
+          <p>
+            <a href={weatherData[0].Link} target="_blank" rel="noopener noreferrer">
+                More Weather Info
+            </a>
+        </p>
+          {/* Add Footer Powered by Accuweather with link */}
+          <p>Powered by <a href="https://www.accuweather.com/en">Accuweather</a></p>
           <button className="close-popup" onClick={handleClosePopup}>Close</button>
         </div>
       )}
