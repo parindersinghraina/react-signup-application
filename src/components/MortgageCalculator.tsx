@@ -38,19 +38,44 @@ const MortgageCalculator: React.FC = () => {
         console.error('Please enter valid values for loan amount, interest rate, and duration.');
         return;
       }
-
+  
       const apiKey = config.NINJAS_API_KEY;
       const headers = {
         'X-Api-Key': apiKey,
       };
-
+  
       const response = await axios.get<MortgageCalculatorResponse>(
         `https://api.api-ninjas.com/v1/mortgagecalculator?loan_amount=${loanAmount}&interest_rate=${interestRate}&duration_years=${durationYears}&annual_property_tax=${propertyTax}&monthly_hoa=${hoa}`,
         { headers }
       );
-
-      setMonthlyPayment(response.data.monthly_payment);
-      setAnnualPayment(response.data.annual_payment);
+  
+      // Open a new window with the results
+      const resultWindow = window.open('', '_blank', 'width=600,height=400');
+      if (resultWindow) {
+        resultWindow.document.write('<html><head><title>Mortgage Calculator Results</title></head><body>');
+        resultWindow.document.write('<h2>Mortgage Calculator Results</h2>');
+  
+        if (response.data.monthly_payment) {
+          resultWindow.document.write('<h3>Monthly Payment</h3>');
+          resultWindow.document.write(`<p>Total: $${response.data.monthly_payment.total}</p>`);
+          resultWindow.document.write(`<p>Mortgage: $${response.data.monthly_payment.mortgage}</p>`);
+          resultWindow.document.write(`<p>Property Tax: $${response.data.monthly_payment.property_tax}</p>`);
+          resultWindow.document.write(`<p>HOA: $${response.data.monthly_payment.hoa}</p>`);
+          resultWindow.document.write(`<p>Annual Home Insurance: $${response.data.monthly_payment.annual_home_ins}</p>`);
+        }
+  
+        if (response.data.annual_payment) {
+          resultWindow.document.write('<h3>Annual Payment</h3>');
+          resultWindow.document.write(`<p>Total: $${response.data.annual_payment.total}</p>`);
+          resultWindow.document.write(`<p>Mortgage: $${response.data.annual_payment.mortgage}</p>`);
+          resultWindow.document.write(`<p>Property Tax: $${response.data.annual_payment.property_tax}</p>`);
+          resultWindow.document.write(`<p>HOA: $${response.data.annual_payment.hoa}</p>`);
+          resultWindow.document.write(`<p>Home Insurance: $${response.data.annual_payment.home_insurance}</p>`);
+        }
+  
+        resultWindow.document.write('</body></html>');
+        resultWindow.document.close();
+      }
     } catch (error) {
       console.error('Error calculating mortgage:', error);
     }

@@ -7,13 +7,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
 import './SignUpForm.css';
-import sendVerificationEmail from '../services/sendVerificationEmail';
 
 
 const SignUpForm: React.FC = () => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState<boolean>(false);
 
@@ -41,13 +41,13 @@ const SignUpForm: React.FC = () => {
     try {
       const response = await axios.post(
         'http://localhost:5001/api/signup',
-        { username, email, password },
+        { username, email, password, phoneNumber },
         { withCredentials: true }
       );
 
       console.log('Axios response:', response.data);
 
-      toast.success('Signup successful! You can now login.', {
+      toast.success('Signup successful! Please Check your email.', {
         onClose: () => {
           // Navigate to the login page after the toast message disappears
           navigate('/login');
@@ -61,15 +61,15 @@ const SignUpForm: React.FC = () => {
       // Check if the error is an AxiosError and has a response with status 400
       if (axios.isAxiosError(error) && error.response?.status === 400) {
         // Show failed toast message
-        toast.error('Signup failed. Please check your inputs.');
+        toast.error('Signup failed. Please check your inputs or May be email already exists.');
       } else {
         // Show a generic error message for other errors
         toast.error('An error occurred during signup. Please try again.');
       }
     }
   };
-   // Toggle password visibility
-   const togglePasswordVisibility = () => {
+  // Toggle password visibility
+  const togglePasswordVisibility = () => {
     setShowPassword((prevShowPassword) => !prevShowPassword);
   };
 
@@ -98,6 +98,17 @@ const SignUpForm: React.FC = () => {
         </label>
         <br />
         <label className="form-label">
+          Phone Number:
+          <input
+            type="text"
+            value={phoneNumber}
+            onChange={(e) => setPhoneNumber(e.target.value)}
+            className="form-input"
+          />
+          <br />
+        </label>
+        <br />
+        <label className="form-label">
           Password:
           <input
             type="password"
@@ -105,6 +116,7 @@ const SignUpForm: React.FC = () => {
             onChange={(e) => setPassword(e.target.value)}
             className="form-input"
           />
+
           {/* Eye icon to toggle password visibility */}
           <FontAwesomeIcon
             icon={showPassword ? faEye : faEyeSlash}
