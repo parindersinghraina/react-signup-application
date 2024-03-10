@@ -8,6 +8,7 @@ import { v4 as uuidv4 } from 'uuid';
 import sendVerificationEmail from './sendVerificationEmail';
 import * as config from '../config.json';
 import path from 'path';
+import { sendOTP } from './otpTwilio';
 
 const app = express();
 const PORT = 5001;
@@ -74,6 +75,10 @@ app.post('/api/signup', async (req: Request<{}, {}, SignupRequestBody>, res: Res
         await newUser.save();
 
         await sendVerificationEmail(email, verificationToken);
+
+        // Send OTP to the provided phone number
+        await sendOTP(phoneNumber);
+        console.log('***********************OTP sent successfully*************************');
 
         res.status(201).json({ message: 'User created successfully. Check your email for verification.' });
     } catch (error) {

@@ -37,7 +37,8 @@ const sendVerificationEmail = async (to: string, token: string) => {
   try {
     // Send the email
     await ses.send(new SendEmailCommand(params));
-    console.log('Email sent successfully');
+    console.log('***********************Email sent successfully***********************');
+
   } catch (error) {
     console.error('Error sending email:', error);
   }

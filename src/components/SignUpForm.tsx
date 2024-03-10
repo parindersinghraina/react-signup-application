@@ -41,7 +41,7 @@ const SignUpForm: React.FC = () => {
     try {
       const response = await axios.post(
         'http://localhost:5001/api/signup',
-        { username, email, password },
+        { username, email, password, phoneNumber },
         { withCredentials: true }
       );
 
@@ -61,7 +61,7 @@ const SignUpForm: React.FC = () => {
       // Check if the error is an AxiosError and has a response with status 400
       if (axios.isAxiosError(error) && error.response?.status === 400) {
         // Show failed toast message
-        toast.error('Signup failed. Please check your inputs.');
+        toast.error('Signup failed. Please check your inputs or May be email already exists.');
       } else {
         // Show a generic error message for other errors
         toast.error('An error occurred during signup. Please try again.');

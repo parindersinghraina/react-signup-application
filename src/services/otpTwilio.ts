@@ -9,7 +9,7 @@ async function sendOTP(phoneNumber: string): Promise<void> {
         const otp = generateOTP(); 
         
         await twilioClient.messages.create({
-            body: `Your OTP is: ${otp}`,
+            body: `Your OTP is: ${otp}. Please enter this code to verify your account / Check your email.`,
             from: config.TWILIO_PHONE_NUMBER,
             to: phoneNumber,
         });
@@ -23,8 +23,6 @@ function generateOTP(): string {
     // Generate a random 6-digit number
     const otp = Math.floor(100000 + Math.random() * 900000).toString();
     return otp;
-  }
+}
 
-export default {
-    sendOTP,
-};
+export { sendOTP }
