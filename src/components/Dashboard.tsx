@@ -43,7 +43,7 @@ const Dashboard: React.FC = () => {
     fetchUserCount();
   }, []);
 
-  return (
+  return (     
     <div className="dashboard-container">
       <video autoPlay muted loop className="dashboard-video">
         <source src={welcomeVideo} type="video/mp4" />
